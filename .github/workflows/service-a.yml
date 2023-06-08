@@ -60,8 +60,8 @@ jobs:
            version: 'v3.12.0'
       - name: Helm Values Preparation
         run: |
-          apt update && apt install gettext-base
-          envsubst < values.yaml.bak > values.yaml
+          apt update && apt-get install gettext-base -y
+          envsubst < service-a/values.yaml.bak > service-a/values.yaml
       - name: Helm Apply
         run: |
           aws --version
