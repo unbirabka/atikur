@@ -38,7 +38,7 @@ jobs:
 
   deploy_k8s:
     name: deploy k8s
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: [build_docker_image]
     steps:
       - name: Git Checkout
@@ -60,7 +60,6 @@ jobs:
            version: 'v3.12.0'
       - name: Helm Values Preparation
         run: |
-          apt update && apt-get install gettext-base -y
           envsubst < service-a/values.yaml.bak > service-a/values.yaml
       - name: Helm Apply
         run: |
