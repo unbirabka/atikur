@@ -1,6 +1,6 @@
 FROM python:3.9.17-alpine3.18
 WORKDIR /app
-COPY . .
+COPY service-b/* .
 
 RUN apk add curl vim
 RUN python3 -m pip install -r requirements.txt
