@@ -25,5 +25,5 @@ jobs:
         with:
           file: service-a/Dockerfile
           push: true
-          tags: sekolahlinux/atikur:${{env.SHORT_SHA}}
+          tags: sekolahlinux/atikur:service-a-${{env.SHORT_SHA}}
 
