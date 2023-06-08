@@ -8,7 +8,7 @@ image:
   # set repository url jika menggunakan private repo non docker hub / atau bisa set image name saja jika menggunakan image yg berada di repo docker registry 
   # repository: 491248485740.dkr.ecr.ap-southeast-1.amazonaws.com/mw-xms
   # repository: ubuntu
-  repository: "$IMAGE_REGISTRY/$APP_NAME"
+  repository: "$IMAGE_REGISTRY"
 
   # set tag docker image
   # tag: 20.04
