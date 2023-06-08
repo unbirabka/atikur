@@ -38,7 +38,7 @@ jobs:
 
   deploy_k8s:
     name: deploy k8s
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: [build_docker_image]
     steps:
       - name: Git Checkout
