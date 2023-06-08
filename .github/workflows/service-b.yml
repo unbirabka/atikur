@@ -7,9 +7,6 @@ on:
     - 'service-b/**'
     
 jobs:
-  build:
-
-jobs:
   build_docker_image:
     name: build docker image
     runs-on: ubuntu-latest
