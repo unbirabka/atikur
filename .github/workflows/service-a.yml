@@ -16,7 +16,6 @@ env:
   PORT: 5000    
     
 jobs:
-
   lint_code:
     name: lint_code
     runs-on: ubuntu-latest
@@ -27,6 +26,7 @@ jobs:
         id: short-sha
         run: |
           python3 -m pip install pylint
+          python3 -m pip install -r requirements.txt
           pylint service-a/main.py
 
   build_docker_image:

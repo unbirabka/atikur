@@ -1,9 +1,11 @@
+"""Testing Code Rukita"""
 from flask import Flask
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
+    """Testing Code Rukita"""
     return "Congratulations, it's service-a"
 
 if __name__ == "__main__":
