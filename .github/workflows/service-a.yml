@@ -38,7 +38,7 @@ jobs:
   deploy_k8s:
     name: deploy k8s
     runs-on: ubuntu-latest
-    needs: [build_docker_image:]
+    needs: [build_docker_image]
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3
