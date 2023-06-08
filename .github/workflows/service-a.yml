@@ -11,5 +11,19 @@ jobs:
     name: build docker image
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - name: Get Short SHA
+        id: short-sha
+        run: |
+          echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: sekolahlinux
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          file: service-a/Dockerfile
+          push: true
+          tags: sekolahlinux/atikur:${{env.SHORT_SHA}}
 
