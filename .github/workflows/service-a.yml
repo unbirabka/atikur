@@ -16,10 +16,26 @@ env:
   PORT: 5000    
     
 jobs:
+
+  lint_code:
+    name: lint_code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3      
+      - name: Get Short SHA
+        id: short-sha
+        run: |
+          python3 -m pip install pylint
+          pylint service-a/main.py
+
   build_docker_image:
     name: build docker image
     runs-on: ubuntu-latest
+    needs: [lint_code]
     steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3      
       - name: Get Short SHA
         id: short-sha
         run: |
