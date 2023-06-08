@@ -12,7 +12,8 @@ env:
   APP_NAME: service-a
   AWS_DEFAULT_REGION: ap-southeast-1
   KUBENAMESPACE: backend
-  KUBECLUSTER: sekolahlinux      
+  KUBECLUSTER: sekolahlinux
+  PORT: 5000    
     
 jobs:
   build_docker_image:
@@ -28,7 +29,7 @@ jobs:
         with:
           username: sekolahlinux
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and Push
         uses: docker/build-push-action@v4
         with:
           file: service-a/Dockerfile
@@ -53,15 +54,22 @@ jobs:
         uses: unfor19/install-aws-cli-action@v1
         with:
           version: 2
-      - uses: azure/setup-helm@v3
+      - name: Install Helm CLI
+        uses: azure/setup-helm@v3
         with:
            version: 'v3.12.0'
+      - name: Helm Values Preparation
+        run: |
+          apt-get install gettext-base
+          envsubst < values.yaml.bak > values.yaml
       - name: Helm Apply
         run: |
           aws --version
           helm version
-#          helm repo add sekolahlinux https://unbirabka.github.io/helm-sekolahlinux/charts
-#          helm repo update
+          helm repo add sekolahlinux https://unbirabka.github.io/helm-sekolahlinux/charts
+          helm repo update
+          helm template service-a sekolahlinux/sekolahlinux --version=0.1.0 -f service-a/values.yaml
 #          aws eks --region ${{env.AWS_DEFAULT_REGION}} update-kubeconfig --name ${{env.KUBECLUSTER}}
 #          helm upgrade --version 0.1.0 ${{env.APP_NAME}}-${{env.ENVIRONMENT}} sekolahlinux/sekolahlinux --install --namespace ${{env.KUBENAMESPACE}} --values service-a/values.yaml 
-            
+
+

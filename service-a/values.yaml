@@ -8,17 +8,17 @@ image:
   # set repository url jika menggunakan private repo non docker hub / atau bisa set image name saja jika menggunakan image yg berada di repo docker registry 
   # repository: 491248485740.dkr.ecr.ap-southeast-1.amazonaws.com/mw-xms
   # repository: ubuntu
-  repository: ""
+  repository: "$IMAGE_REGISTRY/$APP_NAME"
 
   # set tag docker image
   # tag: 20.04
-  tag: latest
+  tag: "$APP_NAME-$SHORT_SHA"
 
 # config dibawah untuk menambahkan label pada resource deployment,pods,service dan service2 lain yang ada di template
 meta:
-  env: ""
-  maintainer: ""
-  version: ""
+  env: "$ENVIRONMENT"
+  maintainer: "$KUBENAMESPACE"
+  version: "$SHORT_SHA"
 
 # config dibawah digunakan untuk resource template deployment.yaml
 server:
@@ -117,7 +117,7 @@ server:
   nodeSelector: {}
 
   # paramater dibawah untuk set port yang saat ini sedang berjalan di container
-  port: 80
+  port: $PORT
 
   # paramater dibawah untuk menambahkan port juga annotation promotheus pada deployment
   prometheus:
@@ -297,18 +297,15 @@ ingress:
     name: letsencrypt
   
   # contoh data paramater dibawah
-  # tls:
-  #   - hosts:
-  #       - test.sekolahlinux.com
   tls:
-    - hosts: []
+    - hosts:
+        - service-a.sekolahlinux.com
 
   # contoh data parameter dibawah
-  # hosts:
-  #   - host: test.sekolahlinux.com
-  #     paths:
-  #       - "/"
-  hosts: []
+  hosts:
+    - host: service-a.sekolahlinux.com
+      paths:
+        - "/"
   pathtype: ImplementationSpecific
   
   # config second ingress domain for second domain, by default false
