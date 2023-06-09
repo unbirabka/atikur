@@ -85,6 +85,12 @@ jobs:
           helm version
           helm repo add sekolahlinux https://unbirabka.github.io/helm-sekolahlinux/charts
           helm repo update
-          helm template service-b sekolahlinux/sekolahlinux --version=0.1.0 -f service-b/values.yaml
+          helm template service-b sekolahlinux/sekolahlinux --version=0.1.0 -f service-b/values.yaml > service-b-${{env.SHORT_SHA}}.yaml
 #          aws eks --region ${{env.AWS_DEFAULT_REGION}} update-kubeconfig --name ${{env.KUBECLUSTER}}
 #          helm upgrade --version 0.1.0 ${{env.APP_NAME}}-${{env.ENVIRONMENT}} sekolahlinux/sekolahlinux --install --namespace ${{env.KUBENAMESPACE}} --values service-b/values.yaml 
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact manifest k8s service-b
+          path: service-b-${{env.SHORT_SHA}}.yaml
+          retention-days: 3
