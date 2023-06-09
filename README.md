@@ -24,7 +24,7 @@ linkedin: https://www.linkedin.com/in/ibnuakbar/
     ├── Dockerfile
     ├── main.py
     ├── requirements.txt
-    └── values.yaml.bak #(helm values service-a)
+    └── values.yaml.bak #(helm values service-b)
 ```
 #
 # helm repository
