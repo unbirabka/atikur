@@ -1,10 +1,10 @@
 # rukita interview
 
-name: akbar ibnu abdillah
+name: *****
 
 blog: https://sekolahlinux.com
 
-linkedin: https://www.linkedin.com/in/ibnuakbar/
+linkedin: https://www.linkedin.com/in/******/
 #
 # layout tree directory
 
